@@ -1,5 +1,4 @@
 #include "sort.h"
-
 /**
  * insertion_sort_list -sorts a doubly linked of int in ascending by Insertion
  * @list: the doubly linked list
@@ -12,7 +11,6 @@ void insertion_sort_list(listint_t **list)
 
 	if (!list || !(*list) || !((*list)->next))
 		return;
-
 	follow = *list;
 	lead = (*list)->next;
 	while (lead)
@@ -25,19 +23,20 @@ void insertion_sort_list(listint_t **list)
 				follow->prev->next = lead;
 			else
 				*list = lead;
-
-			/* change the right node to point to the 
-			 * biger num node */
+			/*
+			 * change the right node to point to the
+			 * biger num node
+			 */
 			if (lead->next)
 				lead->next->prev = follow;
-
 			temp = lead->next;
 			lead->next = follow;
 			lead->prev = follow->prev;
 			follow->next = temp;
 			follow->prev = lead;
 			print_list(*list);
-			/** ti comait the next pair
+			/**
+			 * to compare the next pair
 			 * the old one eith the new one
 			 * that found after changing the prev pair
 			 */
