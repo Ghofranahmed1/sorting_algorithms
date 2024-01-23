@@ -5,46 +5,48 @@
  * @size: size of the array
  * @low: the start position
  * @high: the end position
- *Return : int of the sorted element index
+ * Return: int of the sorted element index
  */
 int partition(int *array, int low, int high, size_t size)
 {
-	int pivot = array[low], start = low, end = high, temp;
+	int i, j, pivot, temp;
 
-	while(start < end)
+	pivot = array[high];
+	i = low;
+	for (j = low; j < high; j++)
 	{
-		while(array[start] <= pivot)
-			start++;
-		while(array[end] > pivot)
-			end--;
-		if (start < end)
+		if (array[j] < pivot)
 		{
-			temp = array[start];
-			array[start] = array[end];
-			array[end] = temp;
-			print_array(array, size);
+			temp = array[i];
+			array[i] = array[j];
+			array[j] = temp;
+			if (array[i] != array[j])
+				print_array(array, size);
+			i++;
 		}
 	}
-	temp = array[start];
-	array[start] = array[end];
-	array[end] =temp;
-	print_array(array, size);
-	return end;
+	temp = array[i];
+	array[i] = array[high];
+	array[high] = temp;
+	if (array[i] != array[high])
+		print_array(array, size);
+	return (i);
 }
-
 
 /**
  * quicksort - function call partition function
  * @array: the array
- * size: size of the array
+ * @size: size of the array
  * @low: the start position
  * @high: the end position
- * Return: nothin
+ * Return: nothing
  */
-void quicksort (int *array, int low, int high, size_t size)
+
+void quicksort(int *array, int low, int high, size_t size)
 {
 	int loc;
-	if(low < high)
+
+	if (low < high)
 	{
 		loc = partition(array, low, high, size);
 		quicksort(array, low, loc - 1, size);
